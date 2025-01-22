@@ -1,5 +1,5 @@
 public class AccessModifiers_Packages_2 {
-//git THEORY ,implementation you can practice from the 2 packages I have created (another package,my package)
+//THEORY ,implementation you can practice from the 2 packages I have created (another package,my package)
 /*
 Access Modifiers
 public:
