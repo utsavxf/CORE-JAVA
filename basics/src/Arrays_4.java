@@ -33,8 +33,8 @@ public class Arrays_4 {
         //CALL BY VALUE VS CALL BY REFERENCE
         //For primitive data types (like int, double, char), passing arguments to a method creates a copy of the value.
         //For objects (like arrays, Strings, custom classes), you pass a reference to the object itself.
-        int one=34;
-        changePrimitive(one);
-        System.out.println("After changing\n"+one);
+        int temp=34;
+        changePrimitive(temp);
+        System.out.println("After changing\n"+temp);
     }
 }
