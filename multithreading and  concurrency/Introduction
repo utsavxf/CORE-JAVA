@@ -1,0 +1,78 @@
+2 types basically running 2 programs parallely or running 2 threads parallely
+process eg->listening on music in 1 tab,playing game in another tab
+threads eg->writing in word,spell checking,formatting
+
+Threads vs Process
+->2 threads share the same address space as they are part of the same program
+->since same space,context switching between threads and communication between threads is usually less expensive as compared to process
+
+Why Multithreading?
+simple answer we don't want our cpu cycles to be wasted so utilize them and save time
+analogy to imagine yourself waking up on a cold morning,you decided to take a bath you switch on the geyser,it will take 10 minutes then what will you do? sit ide? nah ,we would usually do something else like brushing
+let's say CPU is waiting for user input,then we can perform some other tasks
+
+What is Thread?
+a thread is an independent path of execution within a program
+
+THE MAIN THREAD
+->The main thread is the first thread that the JVM (Java Virtual Machine) creates when a Java program starts.
+->It is responsible for executing the main() method.
+->All other threads in a Java program are spawned from the main thread, either directly or indirectly.
+
+THE DAEMON THREAD
+A daemon thread in Java is a low-priority thread that runs in the background, providing support to other user threads for various tasks.
+The JVM does not wait for daemon threads to finish execution; it will terminate them automatically when all non-daemon threads (user threads) have completed their execution.
+
+COMMON USE CASES
+Garbage Collection: The JVM’s garbage collector runs as a daemon thread to clean up unused memory.
+Monitoring Threads: For tasks like checking system health or monitoring performance.
+Background Services: For example, sending periodic notifications, cleaning up temporary files, etc.
+
+SYNCHRONIZATION
+Threads share the same memory space,i.e. they can share resources (objects) but there can be some critical situations where we want only 1 thread at a time to access a shared resource
+eg.booking of a movie seat
+
+OBJECT CLASS IN JAVA
+The Object class in Java is the root class of the Java class hierarchy, meaning every class in Java either directly or indirectly inherits from the Object class.
+This makes the Object class significant as it provides fundamental methods that are inherited by all classes.
+
+Key methods of Object class:
+toString():Returns a string representation of the object. By default, it provides the class name and hashcode.
+equals(Object obj):Compares two objects for equality. The default implementation compares references.
+hashCode():Returns the hashcode of the object, which is used in collections like HashMap.
+clone():Creates a shallow copy of the object. A class must implement the Cloneable interface to use this method.
+finalize():Invoked by the garbage collector before destroying the object. It's rarely used and is deprecated as of Java 9.
+wait(), notify(), and notifyAll(): These are used for thread communication.
+
+1. wait():
+Causes the current thread to wait until another thread invokes notify() or notifyAll() on the same object.
+Must be called from a synchronized block/method; otherwise, it throws IllegalMonitorStateException.
+2. notify():
+Wakes up a single thread waiting on the object's monitor. If multiple threads are waiting, one of them is chosen arbitrarily.
+3. notifyAll():
+Wakes up all threads waiting on the object's monitor
+
+THREAD STATES
+new(created)->ready-to-run(started)->running->dead(completed/terminated)
+now from running state it can go to non-runnable states and there are multiple non-runnable states such as:Sleeping,Blocked for join completion,Blocked for I/O,Waiting for notification->Blocked for lock acquisition
+
+JOIN METHOD ON THREADS
+we already talked about the asynchronous nature of execution of threads by the java but what if we want to stop this and execute the threads based on how we want
+that's when we use this method thread.join();
+
+THREAD PRIORITIES
+Threads are assigned priorities that the thread scheduler can use to determine how the threads will be scheduled
+The Thread scheduler can use thread priorities to determine which thread gets to run
+ranges from 1-10 with 5 being the default priority
+
+Threads with higher priority are more likely to get more CPU time, but this depends on the JVM and the underlying OS thread scheduler.
+it is only an advised to the JVM ,there is no guarantee that higher priority thread will get cpu first and finish executing first
+
+THREAD SCHEDULERS
+JVM follows one of the two strategies:
+preemptive and round robin(time sliced) scheduling
+
+DEADLOCKS
+A deadlock is a situation where a thread is waiting for an object lock that another thread holds and this second thread is waiting for an object lock that the first thread holds
+Since each thread is waiting for the other thread to relinquish a lock,they both remain waiting forever in the Blocked-for-lock-acquisition state
+

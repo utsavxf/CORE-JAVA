@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/collection frameworks/collection frameworks.iml" filepath="$PROJECT_DIR$/collection frameworks/collection frameworks.iml" />
       <module fileurl="file://$PROJECT_DIR$/exception handling/exception handling.iml" filepath="$PROJECT_DIR$/exception handling/exception handling.iml" />
       <module fileurl="file://$PROJECT_DIR$/file handling/file handling.iml" filepath="$PROJECT_DIR$/file handling/file handling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multithreading and  concurrency/multithreading and  concurrency.iml" filepath="$PROJECT_DIR$/multithreading and  concurrency/multithreading and  concurrency.iml" />
       <module fileurl="file://$PROJECT_DIR$/oops principles/oops principles.iml" filepath="$PROJECT_DIR$/oops principles/oops principles.iml" />
     </modules>
   </component>
