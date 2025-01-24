@@ -76,3 +76,111 @@ DEADLOCKS
 A deadlock is a situation where a thread is waiting for an object lock that another thread holds and this second thread is waiting for an object lock that the first thread holds
 Since each thread is waiting for the other thread to relinquish a lock,they both remain waiting forever in the Blocked-for-lock-acquisition state
 
+THREAD POOL
+A Thread Pool is a collection of reusable threads. Instead of creating and destroying threads for every task, a thread pool manages a fixed or dynamic number of threads and assigns tasks to them as they become available. This improves the efficiency and performance of multithreaded applications.
+Thread pools are part of the Executor Framework in the java.util.concurrent package.
+
+Advantages of Thread Pools
+Performance: Reduces the overhead of thread creation and destruction.
+Resource Management: Limits the number of threads to avoid exhausting system resources.
+Scalability: Thread pools are better suited for managing concurrent tasks in high-load scenarios.
+Ease of Use: Simplifies thread management with built-in utilities.
+
+so you are saying that our program stores some thread beforehand for tasks instead of creating them on the go and later destroying them after the program
+That’s the essence of thread pools.Instead of creating and destroying threads every time a task is submitted, the thread pool does the following:
+
+Pre-Creates Threads: When the thread pool is initialized, it creates a set number of threads (in a fixed thread pool) or keeps threads ready to be created dynamically (in a cached thread pool).
+Reuses Threads: After a thread completes its assigned task, it doesn't get destroyed. Instead, it goes back to the pool, ready to take on the next task.
+Efficient Task Management:
+When you submit a task, it’s queued if all threads are busy.
+When a thread becomes available, it picks up a task from the queue.
+Resource Optimization:
+Creating and destroying threads repeatedly consumes resources (time and memory). Thread pools solve this by keeping a set of reusable threads alive.
+Control Over Thread Count:
+By controlling the number of threads in a pool, you can prevent the system from being overwhelmed (e.g., too many threads competing for CPU).
+
+EXECUTORS FRAMEWORK (refer Engineering Digest Youtube video)
+introduced in Java 5 to simplify development of concurrent applications by abstracting away complexities involved in creating and managing threads
+prior to this developers used to manually create threads and starting them using Thread class or Runnable interface,about which you already know
+
+Executor Framework has 3 main interfaces:Executor,ExecutorService,ScheduledExecutorServiceut
+
+Key Concepts in Executors
+Executor Interface:
+Provides a simple way of managing threads.
+Main method: execute(Runnable command).
+
+ExecutorService:
+A sub-interface of Executor or we can say that ExecutorService extends Executor interface that provides more control over thread execution and termination.
+Methods include:
+submit(): Accepts Runnable or Callable tasks and returns a Future.
+shutdown(): Initiates an orderly shutdown of the executor.
+shutdownNow(): Attempts to stop all actively executing tasks.
+isShutdown(): Checks if the executor is shut down.
+awaitTermination(): Blocks until all tasks have completed execution after a shutdown request.
+
+ThreadPoolExecutor:
+Implements ExecutorService.
+A powerful class that manages a pool of threads.
+ScheduledExecutorService:
+Used for scheduling tasks to run after a delay or periodically.
+
+COMMONLY USED THREAD POOLS
+Single Thread Executor: A single thread executes tasks sequentially.
+ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
+Fixed Thread Pool: A fixed number of threads handle tasks.
+ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+
+Cached Thread Pool: Dynamically creates threads as needed but reuses them if available.
+ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+
+Scheduled Thread Pool: Schedules tasks for delayed or periodic execution.
+ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
+
+COMPLETABLE FUTURE
+introduced in Java 8
+Asynchronous Programming: CompletableFuture is a powerful class in Java's java.util.concurrent package that facilitates asynchronous programming. It represents the result of an asynchronous computation that may or may not have completed yet.
+Non-Blocking Operations: Unlike traditional blocking operations, CompletableFuture enables you to perform tasks in the background without blocking the main thread. This improves responsiveness and performance, especially in I/O-bound or computationally intensive scenarios
+
+
+THREADS VS EXECUTORS VS COMPLETABLE FUTURE
+
+THREADS
+Definition: A thread is the smallest unit of execution in Java. When you create a thread, you’re creating a path of execution that runs independently from the main program.
+Asynchronous Nature: Threads run asynchronously. If you create multiple threads, they can execute tasks simultaneously (or seemingly so, via time-sharing on a single-core processor).
+Issues with Threads:
+Manual management: You need to create, start, and synchronize threads yourself.
+Resource-intensive: Creating and destroying threads repeatedly leads to significant overhead.
+Lack of composability: Threads lack built-in mechanisms to chain tasks, manage results, or handle exceptions easily.
+
+EXECUTORS(THREAD POOLS)
+Definition: The Executors framework is a high-level abstraction for managing a thread pool. Instead of manually creating and destroying threads for each task, the executor maintains a pool of pre-created threads.
+Purpose: Executors solve the problem of repeated thread creation/destruction by reusing threads in a pool. This reduces overhead and ensures better performance, especially for applications with many short-lived tasks.
+Key Features:
+Automatically handles thread lifecycle (creation, reuse, and termination).
+Provides a mechanism to submit tasks (Runnable or Callable).
+Supports multiple types of thread pools (fixed, cached, scheduled, etc.).
+
+COMPLETABLE FUTURE
+Definition: CompletableFuture is an advanced API for asynchronous programming. It builds on executors and provides a declarative way to manage tasks, handle results, chain tasks, and deal with exceptions.
+
+How It Works:
+Uses thread pools internally (just like Executors).
+Automatically manages task execution and results.
+Provides methods to chain dependent tasks (thenApply, thenCompose, etc.).
+Offers better support for non-blocking programming (e.g., thenRunAsync).
+Supports both synchronous and asynchronous tasks.
+Differences from Threads:
+
+No manual thread management: You don’t need to worry about thread creation or lifecycle.
+Composability: Built-in support for chaining tasks and handling results.
+Exception Handling: Simplifies exception handling in asynchronous code.
+Efficiency: Uses thread pools to reuse threads, just like Executors.
+
+Key Features:
+Asynchronous programming with future results.
+Task chaining and functional-style programming.
+Better resource utilization (reuses threads in pools).
+
+
