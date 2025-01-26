@@ -1,0 +1,44 @@
+Why was Java-8 introduced,what were the problem with Java 7
+->to write more concise and minimal code
+->to introduce functional programming benefits in Java as we know it's an object oriented programming
+->to enable parallel programming,more compatible code for multi-core processors
+
+Features of Java 8:
+->Lambda expressions
+->Stream api
+->Date and Time api
+->Base 64 decode and encode,built in class for decoding and encoding
+->Default,static methods
+->Functional Interface(only 1 abstract method)
+
+
+how does compiler resolved lambda expression?
+The code:
+Employee employee1 = () -> {
+    return "Data Engineer";
+};
+
+Is functionally equivalent to:
+Employee employee1 = new Employee() {
+    @Override
+    public String getName() {
+        return "Data Engineer";
+    }
+};
+
+Here:
+
+The compiler generates a new anonymous class implementing Employee.
+The employee1 variable holds a reference to this anonymous class object.
+So yes, employee1 is an object, but it references a dynamically generated class that implements the Employee interface.
+
+
+NEW DATE-TIME CLASSES
+1.Local Date
+2.Local Time
+3.Local Date Time
+4.Zoned Date Time
+5.Instant
+6.Duration
+7.Period
+8.DateTimeFormatter
