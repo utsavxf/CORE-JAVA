@@ -108,7 +108,7 @@ Executor Framework has 3 main interfaces:Executor,ExecutorService,ScheduledExecu
 Key Concepts in Executors
 Executor Interface:
 Provides a simple way of managing threads.
-Main method: execute(Runnable command).
+Var_DataType_1 method: execute(Runnable command).
 
 ExecutorService:
 A sub-interface of Executor or we can say that ExecutorService extends Executor interface that provides more control over thread execution and termination.
